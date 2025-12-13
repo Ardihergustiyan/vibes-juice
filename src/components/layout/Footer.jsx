@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
 
 const Footer = () => {
@@ -6,16 +7,16 @@ const Footer = () => {
 
   const footerLinks = {
     tentang: [
-      { name: 'Tentang Kami', href: '#tentang' },
-      { name: 'Menu', href: '#menu' },
-      { name: 'Kedai Kode', href: '#kedai' },
-      { name: 'Karir', href: '#karir' },
+      { name: 'Tentang Kami', href: '/' },
+      { name: 'Menu', href: '/menu' },
+      { name: 'Kedai Kode', href: '/kedai' },
+      { name: 'Karir', href: '/karir' },
     ],
     layanan: [
-      { name: 'Investasi', href: '#investasi' },
-      { name: 'Waralaba', href: '#waralaba' },
-      { name: 'Kemitraan', href: '#kemitraan' },
-      { name: 'Proposal', href: '#proposal' },
+      { name: 'Investasi', href: '/investasi' },
+      { name: 'Hubungi Kami', href: '/hubungi' },
+      { name: 'Waralaba', href: '/investasi' },
+      { name: 'Proposal', href: '/hubungi' },
     ],
     legal: [
       { name: 'Syarat & Ketentuan', href: '#syarat' },
@@ -25,9 +26,9 @@ const Footer = () => {
   };
 
   const socialMedia = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
+    { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
+    { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
+    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
   ];
 
   return (
@@ -36,10 +37,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand Section */}
           <div className="space-y-4">
-            <div>
-              <h3 className="text-2xl font-serif font-bold tracking-wider mb-1">VibesJuice</h3>
+            <Link to="/">
+              <h3 className="text-2xl font-serif font-bold tracking-wider mb-1 hover:opacity-80 transition-opacity">
+                VibesJuice
+              </h3>
               <p className="text-xs text-gray-300 tracking-widest">SINCE 1982</p>
-            </div>
+            </Link>
             <p className="text-sm text-gray-200 leading-relaxed">
               Menyajikan kesegaran alami dengan kualitas terbaik untuk gaya hidup sehat Anda.
             </p>
@@ -49,6 +52,8 @@ const Footer = () => {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors"
                 >
@@ -64,12 +69,12 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.tentang.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-gray-200 hover:text-white transition-colors hover:translate-x-1 inline-block"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -81,12 +86,12 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.layanan.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-gray-200 hover:text-white transition-colors hover:translate-x-1 inline-block"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -99,8 +104,8 @@ const Footer = () => {
               <li className="flex items-start space-x-3">
                 <MapPin size={18} className="flex-shrink-0 mt-1" />
                 <span className="text-sm text-gray-200">
-                  Jl. Contoh No. 123<br />
-                  Jakarta Selatan, 12345
+                  Jl. Raya Serpong No. 123<br />
+                  Tangerang Selatan, Banten 15310
                 </span>
               </li>
               <li className="flex items-center space-x-3">

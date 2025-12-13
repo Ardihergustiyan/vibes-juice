@@ -1,155 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const footerLinks = {
-    tentang: [
-      { name: 'Tentang Kami', href: '/' },
-      { name: 'Menu', href: '/menu' },
-      { name: 'Kedai Kode', href: '/kedai' },
-      { name: 'Karir', href: '/karir' },
-    ],
-    layanan: [
-      { name: 'Investasi', href: '/investasi' },
-      { name: 'Hubungi Kami', href: '/hubungi' },
-      { name: 'Waralaba', href: '/investasi' },
-      { name: 'Proposal', href: '/hubungi' },
-    ],
-    legal: [
-      { name: 'Syarat & Ketentuan', href: '#syarat' },
-      { name: 'Kebijakan Privasi', href: '#privasi' },
-      { name: 'FAQ', href: '#faq' },
-    ],
-  };
-
-  const socialMedia = [
-    { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
-    { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+  const menuItems = [
+    { name: 'Menu', href: '/menu' },
+    { name: 'Kedai Kode', href: '/kedai' },
+    { name: 'Investasi', href: '/investasi' },
+    { name: 'Karir', href: '/karir' },
+    { name: 'Hubungi Kami', href: '/hubungi' },
   ];
 
   return (
-    <footer className="bg-[#5a6b3f] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand Section */}
-          <div className="space-y-4">
-            <Link to="/">
-              <h3 className="text-2xl font-serif font-bold tracking-wider mb-1 hover:opacity-80 transition-opacity">
-                VibesJuice
-              </h3>
-              <p className="text-xs text-gray-300 tracking-widest">SINCE 1982</p>
-            </Link>
-            <p className="text-sm text-gray-200 leading-relaxed">
-              Menyajikan kesegaran alami dengan kualitas terbaik untuk gaya hidup sehat Anda.
+    <nav className="bg-white/95 backdrop-blur-sm shadow-md fixed w-full top-0 z-50 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
+            <h1 className="text-2xl md:text-3xl font-serif font-bold tracking-wider text-[#5a6b3f]">
+              VibesJuice
+            </h1>
+            <p className="text-[10px] text-gray-500 tracking-[0.2em] font-medium">
+              SINCE 1982
             </p>
-            {/* Social Media */}
-            <div className="flex space-x-4 pt-2">
-              {socialMedia.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors"
-                >
-                  <social.icon size={18} />
-                </a>
-              ))}
-            </div>
+          </Link>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="text-gray-700 hover:text-[#5a6b3f] px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-gray-50"
+              >
+                {item.name}
+              </Link>
+            ))}
+            <button className="ml-4 bg-[#5a6b3f] text-white px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#4a5b2f] hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+              Lihat Proposal
+            </button>
           </div>
 
-          {/* Tentang Kami */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4">Tentang Kami</h4>
-            <ul className="space-y-2">
-              {footerLinks.tentang.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-gray-200 hover:text-white transition-colors hover:translate-x-1 inline-block"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Layanan */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4">Layanan</h4>
-            <ul className="space-y-2">
-              {footerLinks.layanan.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-gray-200 hover:text-white transition-colors hover:translate-x-1 inline-block"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Kontak */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4">Hubungi Kami</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <MapPin size={18} className="flex-shrink-0 mt-1" />
-                <span className="text-sm text-gray-200">
-                  Jl. Raya Serpong No. 123<br />
-                  Tangerang Selatan, Banten 15310
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Phone size={18} className="flex-shrink-0" />
-                <a href="tel:+6281234567890" className="text-sm text-gray-200 hover:text-white transition-colors">
-                  +62 812-3456-7890
-                </a>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Mail size={18} className="flex-shrink-0" />
-                <a href="mailto:info@juskode.com" className="text-sm text-gray-200 hover:text-white transition-colors">
-                  info@juskode.com
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="border-t border-white/20 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-gray-300 text-center md:text-left">
-              © {currentYear} Jus Kode. All rights reserved.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              {footerLinks.legal.map((link, index) => (
-                <React.Fragment key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                  {index < footerLinks.legal.length - 1 && (
-                    <span className="text-gray-400">•</span>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-700 hover:text-[#5a6b3f] p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
       </div>
-    </footer>
+
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="bg-white border-t border-gray-100">
+          <div className="px-4 pt-4 pb-6 space-y-2">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="block text-gray-700 hover:text-[#5a6b3f] hover:bg-gray-50 px-4 py-3 rounded-lg font-medium transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <button 
+              className="w-full bg-[#5a6b3f] text-white px-6 py-3 rounded-full font-medium hover:bg-[#4a5b2f] transition-colors mt-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Lihat Proposal
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 
-export default Footer;
+export default Navbar;
