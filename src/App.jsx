@@ -11,7 +11,7 @@ import HubungiKami from './pages/HubungiKami';
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/vibes-juice">
       <div className="min-h-screen bg-white">
         <Navbar />
         <Routes>
