@@ -2,7 +2,7 @@
 import React from 'react';
 import Hero from '../components/home/Hero';
 import FeaturesSection from '../components/home/FeaturesSection';
-import ProductCards from '../components/home/ProductCards';
+import MenuPreview from '../components/home/MenuPreview';
 import CTASection from '../components/home/CTASection';
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <Hero />
       <FeaturesSection />
-      <ProductCards />
+      <MenuPreview />
       <CTASection />
     </>
   );
