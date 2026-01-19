@@ -1,8 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
+import lumenGallery1 from '../../assets/Gallery/gallery1.JPG';
+import lumenGallery4 from '../../assets/Gallery/gallery4.JPG';
+import lumenGallery3 from '../../assets/Gallery/gallery3.JPG';
+import lumenGallery2 from '../../assets/Gallery/gallery2.JPG';
 
 const MenuPreview = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [loadedImages, setLoadedImages] = useState({});
   const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideLeftRight {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(-20px); }
+      }
+      @keyframes shimmer {
+        0% { background-position: -1000px 0; }
+        100% { background-position: 1000px 0; }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,25 +46,29 @@ const MenuPreview = () => {
     };
   }, []);
 
+  const handleImageLoad = (id) => {
+    setLoadedImages(prev => ({ ...prev, [id]: true }));
+  };
+
   const images = [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=1200&q=80',
+      image: lumenGallery1,
       style: 'large'
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=800&q=80',
+      image: lumenGallery2,
       style: 'circle'
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800&q=80',
+      image: lumenGallery3,
       style: 'medium'
     },
     {
       id: 4,
-      image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&q=80',
+      image: lumenGallery4,
       style: 'small'
     }
   ];
@@ -83,10 +108,22 @@ const MenuPreview = () => {
             }`}
           >
             <div className="aspect-[4/5] md:aspect-[3/4] relative group">
+              {!loadedImages[0] && (
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200"
+                  style={{ 
+                    backgroundSize: '1000px 100%',
+                    animation: 'shimmer 2s infinite linear'
+                  }}
+                ></div>
+              )}
               <img
                 src={images[0].image}
                 alt="Lumen"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                onLoad={() => handleImageLoad(0)}
+                className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${
+                  loadedImages[0] ? 'opacity-100' : 'opacity-0'
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
@@ -99,10 +136,22 @@ const MenuPreview = () => {
             }`}
           >
             <div className="aspect-square relative group">
+              {!loadedImages[1] && (
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200"
+                  style={{ 
+                    backgroundSize: '1000px 100%',
+                    animation: 'shimmer 2s infinite linear'
+                  }}
+                ></div>
+              )}
               <img
                 src={images[1].image}
                 alt="Lumen"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                onLoad={() => handleImageLoad(1)}
+                className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${
+                  loadedImages[1] ? 'opacity-100' : 'opacity-0'
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
@@ -115,10 +164,22 @@ const MenuPreview = () => {
             }`}
           >
             <div className="aspect-[4/3] relative group">
+              {!loadedImages[2] && (
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200"
+                  style={{ 
+                    backgroundSize: '1000px 100%',
+                    animation: 'shimmer 2s infinite linear'
+                  }}
+                ></div>
+              )}
               <img
                 src={images[2].image}
                 alt="Lumen"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                onLoad={() => handleImageLoad(2)}
+                className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${
+                  loadedImages[2] ? 'opacity-100' : 'opacity-0'
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
@@ -129,12 +190,25 @@ const MenuPreview = () => {
             className={`col-span-12 md:col-span-5 md:col-start-8 rounded-3xl overflow-hidden transition-all duration-[1500ms] delay-600 ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-24'
             }`}
+            style={isVisible ? { animation: 'slideLeftRight 4s ease-in-out infinite' } : {}}
           >
             <div className="aspect-[16/9] md:aspect-[3/2] relative group">
+              {!loadedImages[3] && (
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200"
+                  style={{ 
+                    backgroundSize: '1000px 100%',
+                    animation: 'shimmer 2s infinite linear'
+                  }}
+                ></div>
+              )}
               <img
                 src={images[3].image}
                 alt="Lumen"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                onLoad={() => handleImageLoad(3)}
+                className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${
+                  loadedImages[3] ? 'opacity-100' : 'opacity-0'
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
